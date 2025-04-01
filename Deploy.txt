@@ -1,0 +1,170 @@
+cd C:\Users\Dmitr\Documents\GitHub\venvs\FlowerShopBotVenv\Scripts\
+cd C:\Users\Dmitr\Downloads\FlowerShopProject
+
+environs==14.1.1
+
+pip install environs
+
+from environs import env
+env.read_env()
+DATABASE_SECRET_KEY = env("SECRET_KEY")
+DEBUG = env.bool("DEBUG", False)
+
+
+
+
+
+
+
+Сохранить файл в формате папку с проектом в формате zip
+FlowerShopProject.zip
+
+Загрузить файл на сервер
+
+Перейти в раздел consoles
+
+Запустить bash консоль
+
+Распаковать файл
+
+unzip FlowerShopProject.zip
+
+Создать виртуальное окружение 
+
+mkvirtualenv --python=/usr/bin/python3.12 mysite-virtualenv
+
+перейти папку проекта
+
+cd /home/DmitriyB/FlowerShopProject/
+
+установить требуемые библиотеки
+
+pip install -r r.txt
+
+pip install aiohttp-socks
+
+Определить запомнить пути:
+
+Путь до папки с файлом manage.py
+/home/DmitriyB/FlowerShopProject/
+
+Имя проекта(Папка которая содержит settings.py)
+FlowerShopProject
+
+имя виртуального окружения
+mysite-virtualenv
+
+перейти на вкладку web и создать новое приложение в режиме manual configuration
+Выбрать питон 3.12
+
+Ввести в раздел virtualenv имя виртуального окружения
+
+mysite-virtualenv
+
+заполнить раздел Code
+
+Source Code: /home/DmitriyB/FlowerShopProject/
+
+Откорректировать WSGI файл
+
+Удалить все кроме раздела django
+Вписать
+
+# +++++++++++ DJANGO +++++++++++
+import os
+import sys
+
+# assuming your django settings file is at '/home/DmitriyB/mysite/mysite/settings.py'
+# and your manage.py is is at '/home/DmitriyB/mysite/manage.py'
+path = '/home/DmitriyB/FlowerShopProject/'
+if path not in sys.path:
+    sys.path.append(path)
+
+os.chdir(path)
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'FlowerShopProject.settings') (взять из settings py проекта)
+# os.environ['DJANGO_SETTINGS_MODULE'] = 'FlowerShopProject.settings'
+
+import django
+django.setup()
+from django.core.wsgi import get_wsgi_application
+application = get_wsgi_application()
+
+./manage.py migrate
+python manage.py migrate
+python manage.py migrate
+python manage.py makemigrations
+python manage.py migrate
+
+
+Установка статических файлов
+
+Добавить в конец файла settings.py Вашего проекта строку для создания директории хранения статических файлов:
+
+STATIC_ROOT = "/home/myusername/myproject/static"
+
+для данного проекта нужна строка:
+
+STATIC_ROOT = "/home/DmitriyB/FlowerShopProject/static"
+
+Run pythonX.Y manage.py collectstatic, где вместо X.Y поставить веряию Питона
+
+python manage.py collectstatic
+
+Выведется сообщение типа 
+127 static files copied to '/home/DmitriyB/FlowerShopProject/static'.
+
+Во вкладке Web заполнить поля раздела Static Path
+URL - /static/
+Directory - /home/DmitriyB/FlowerShopProject/static
+
+в settings.py заполнить allowed hosts
+
+dmitriyb.pythonanywhere.com
+
+
+
+
+
+
+
+
+
+Создать папку static по пути который мы прописали
+
+Запустить .manage.py collectstatic
+
+.manage.py migrate
+
+
+
+
+# This file contains the WSGI configuration required to serve up your
+# web application at http://DmitriyB.pythonanywhere.com/
+# It works by setting the variable 'application' to a WSGI handler of some
+# description.
+#
+
+# +++++++++++ GENERAL DEBUGGING TIPS +++++++++++
+# getting imports and sys.path right can be fiddly!
+# We've tried to collect some general tips here:
+# https://help.pythonanywhere.com/pages/DebuggingImportError
+
+
+# +++++++++++ DJANGO +++++++++++
+import os
+import sys
+
+# assuming your django settings file is at '/home/DmitriyB/mysite/mysite/settings.py'
+# and your manage.py is is at '/home/DmitriyB/mysite/manage.py'
+path = '/home/DmitriyB/FlowerShopProject/'
+if path not in sys.path:
+    sys.path.append(path)
+
+os.chdir(path)
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'FlowerShopProject.settings')
+# os.environ['DJANGO_SETTINGS_MODULE'] = 'FlowerShopProject.settings'
+
+import django
+django.setup()
+from django.core.wsgi import get_wsgi_application
+application = get_wsgi_application()
