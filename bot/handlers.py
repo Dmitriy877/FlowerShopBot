@@ -299,7 +299,7 @@ async def process_successful_payment(message: Message, state: FSMContext):
     )
 
     await message.bot.send_message(
-        chat_id=7956301673,
+        chat_id=1829599727,
         text=courier_message
     )
 
